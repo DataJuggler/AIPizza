@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIPizza", "AIPizza.csproj", "{4E0C05FD-B34F-470F-943E-B25992034B6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{BFBF502B-1A6B-462E-AF3D-FB6B387C4BE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessComponent", "Data\DataAccessComponent\DataAccessComponent.csproj", "{E473AC1F-2E9F-4E18-951D-CAECA5D7A8D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectLibrary", "Data\ObjectLibrary\ObjectLibrary.csproj", "{728EB176-7616-4F8D-BE08-39F1D2D52662}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E0C05FD-B34F-470F-943E-B25992034B6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0C05FD-B34F-470F-943E-B25992034B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0C05FD-B34F-470F-943E-B25992034B6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0C05FD-B34F-470F-943E-B25992034B6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E473AC1F-2E9F-4E18-951D-CAECA5D7A8D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E473AC1F-2E9F-4E18-951D-CAECA5D7A8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E473AC1F-2E9F-4E18-951D-CAECA5D7A8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E473AC1F-2E9F-4E18-951D-CAECA5D7A8D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{728EB176-7616-4F8D-BE08-39F1D2D52662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{728EB176-7616-4F8D-BE08-39F1D2D52662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{728EB176-7616-4F8D-BE08-39F1D2D52662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{728EB176-7616-4F8D-BE08-39F1D2D52662}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E473AC1F-2E9F-4E18-951D-CAECA5D7A8D7} = {BFBF502B-1A6B-462E-AF3D-FB6B387C4BE9}
+		{728EB176-7616-4F8D-BE08-39F1D2D52662} = {BFBF502B-1A6B-462E-AF3D-FB6B387C4BE9}
+	EndGlobalSection
+EndGlobal

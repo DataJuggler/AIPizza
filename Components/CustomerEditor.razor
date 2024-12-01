@@ -1,0 +1,88 @@
+﻿@using ObjectLibrary.Enumerations
+@using DataJuggler.Blazor.Components
+@using System.Drawing
+
+<div class="row">
+    <div class="floatleft">
+        <TextBoxComponent Name="NameControl" Parent="this" Caption="Name:"
+            ClassName="displayinlineblock" LabelColor="Coral" SendAllTextToParent="true"
+            Column1Width="100" TextBoxWidth="140" LabelClassName="down4 right2 fontsize18" Width="260">
+        </TextBoxComponent>
+    </div>
+    <div>
+    </div>
+</div>
+<div class="row">
+    <div class="floatleft">
+        <TextBoxComponent Name="AddressControl" Parent="this" Caption="Address:"
+            ClassName="displayinlineblock" LabelColor="Coral" SendAllTextToParent="true"
+            Column1Width="100" TextBoxWidth="240" LabelClassName="down4 right2 fontsize18" Width="360">
+        </TextBoxComponent>
+    </div>
+    <div>
+    </div>
+</div>
+<div class="row">
+    <div class="floatleft">
+        <TextBoxComponent Name="CityControl" Parent="this" Caption="City:"
+            ClassName="displayinlineblock" LabelColor="Coral" SendAllTextToParent="true"
+            Column1Width="100" TextBoxWidth="140" LabelClassName="down4 right2 fontsize18" Width="260">
+        </TextBoxComponent>
+    </div>
+    <div>
+    </div>
+</div>
+<div class="row">
+    <div class="floatleft">
+        <TextBoxComponent Name="StateControl" Parent="this" Caption="State:"
+            ClassName="displayinlineblock" LabelColor="Coral" SendAllTextToParent="true"
+            TextBoxTextColor="GhostWhite"
+            Column1Width="100" TextBoxWidth="140" LabelClassName="down4 right2 fontsize18"
+            Width="260" Text="TX" Enabled="false" TextBoxBackColor="gray">
+        </TextBoxComponent>
+    </div>
+    <div>
+    </div>
+</div>
+<div class="row">
+    <div class="floatleft textdonotwrap">
+        <TextBoxComponent Name="ZipControl" Parent="this" Caption="Zip:"
+            ClassName="displayinlineblock" LabelColor="Coral" SendAllTextToParent="true"
+            Column1Width="100" TextBoxWidth="100" LabelClassName="down4 right2 fontsize18"
+            Width="220">
+        </TextBoxComponent>
+    </div>
+    <div>
+    </div>
+</div>
+<div class="row">
+    <div class="floatleft textdonotwrap">
+        <TextBoxComponent Name="PhoneControl" Parent="this" Caption="Phone:"
+            ClassName="displayinlineblock" LabelColor="Coral" SendAllTextToParent="true"
+            FormatAsPhoneNumber="true"
+            Column1Width="100" LabelClassName="down4 right2 fontsize18"
+            TextBoxWidth="100" Width="220">
+        </TextBoxComponent>
+    </div>
+    <div>
+    </div>
+</div>
+<div class="row">
+    <div class="floatleft textdonotwrap right70">
+        <ToggleComponent Name="VIPClubControl" Parent="this" Width="60"
+            OvalTop="-22" OvalLeft="88" OvalWidth="24" OvalRadius="50"
+            LabelFontSize="18" LabelColor="Coral" On="false" 
+            CircleColor="Color.White" BackgroundColorOff="Color.DarkRed" BackgroundColorOn="Color.LightSalmon"
+            CircleColorOff="Color.Firebrick"
+            CircleWidth="14" CircleHeight="14" Caption="VIP Member: " Column1Width="100">
+        </ToggleComponent>
+    </div>
+    <div>
+    </div>
+</div>
+<div class="row down20 right40">
+    <div class="floatleft">
+        <button class="redbutton" @onclick="SaveCustomer">Save</button>
+        <button class="redbutton" @onclick="Cancel">Cancel</button>
+    </div>
+</div>

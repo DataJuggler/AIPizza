@@ -1,0 +1,22 @@
+﻿@using DataJuggler.Blazor.Components
+
+<div class="row">
+    <div class="floatleft">
+        <TextBoxComponent Name="PhoneControl" Parent="this" Caption="Phone:"
+            ClassName="displayinlineblock" LabelColor="Coral" SendAllTextToParent="true"
+            SetFocusOnFirstRender="true"
+            Column1Width="100" LabelClassName="down4 right2 fontsize18" Width="240">
+        </TextBoxComponent>
+    </div>
+    <div class="floatleft up2">
+        <button class="redbutton" @onclick="LookupCustomer">Find</button>
+        <button class="redbutton" @onclick="Cancel">Cancel</button>
+    </div>
+</div>
+<div class="row">
+    <div class="floatleft">
+    </div>
+    <div class="floatleft up2">
+        <button class="redbuttonwide" @onclick="NewCustomer">New Customer</button>
+    </div>
+</div>
