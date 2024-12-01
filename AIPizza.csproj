@@ -30,4 +30,8 @@
     <ProjectReference Include="Data\ObjectLibrary\ObjectLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SQL\" />
+  </ItemGroup>
+
 </Project>
