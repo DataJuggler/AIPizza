@@ -133,7 +133,7 @@ namespace AIPizza.Components.Pages
             /// <summary>
             /// Display Message
             /// </summary>
-            public void DisplayMessage(string messageText)
+            public async void DisplayMessage(string messageText)
             {
                 // if the value for HasStatusLabel is true
                 if (HasStatusLabel)
@@ -144,8 +144,14 @@ namespace AIPizza.Components.Pages
                     // Display the message
                     ShowStatusMessage = true;
 
+                    // Show the StatusLabel
+                    StatusLabel.SetVisibility(true);
+
                     // Update the UI
                     Refresh();
+
+                    // Set the visibility to fade away
+                    await StatusLabel.ShowThenHide();
                 }
             }
             #endregion
