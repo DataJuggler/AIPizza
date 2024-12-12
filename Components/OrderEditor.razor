@@ -3,7 +3,7 @@
 @using DataJuggler.Blazor.Components.Enumerations
 @using System.Drawing
 
-<div class="row floatleft">    
+<div class="row">    
     <TextBoxComponent Name="OrderNumberTextBox" Parent="this" Caption="Order #:"
         ClassName="displayinlineblock" LabelColor="Coral" SendAllTextToParent="true"
         TextBoxTextColor="GhostWhite"
@@ -14,10 +14,54 @@
 <div class="row">
     <ComboBox Name="OrderTypeComboBox" Theme=ThemeEnum.Black Unit="px" HeightUnit="px" 
         Height="32" ZIndex="80" LabelText="Order Type:" Width="224" Parent="this" 
-        ButtonHeight=25 ButtonWidth=24 LabelFontSize="18" LabelFontName="Calibri"
-        TextBoxLeft="0" DropdownClassName="container2 border1gray textdonotwrap"  
-        ButtonTop=0 ButtonLeft=0 ListItemWidth="180" ListZIndex=180 ListItemTop=24 
+        ButtonHeight=24 ButtonWidth=24 LabelFontSize="18" LabelFontName="Calibri"
+        TextBoxLeft="0" DropdownClassName="container2 border1gray textdonotwrap"         
+        ButtonTop=0 ButtonLeft=-1 ListItemWidth="180" ListZIndex=180 ListItemTop=24 
         LabelColor="Color.Coral" Column2Width="128" Position="relative" Top="0"  Left="-3"
-        LabelClassName="down4 right2" TextBoxWidth="124" TextBoxHeight="24">
+        LabelClassName="down4 right2" TextBoxWidth="124" TextBoxHeight="22">
     </ComboBox>
 </div>
+<div class="row">
+    <ToggleComponent Name="OrderNowComponent" Parent="this"
+        OvalTop="0" OvalLeft="89" OvalWidth="16" OvalRadius="50"
+        LabelFontSize="18" LabelColor="Coral" On="@OrderNow" LabelTop="0"
+        Position="relative" Left="16" Top="32" NotifyParentOnChange="true"
+        CircleColor="Color.White" OvalBackgroundColorOff="Color.DarkRed" 
+        CircleColorOff="Color.Firebrick" OvalBackgroundColorOn="Color.Coral"
+        CircleWidth="12" CircleHeight="12" Caption="Order Now: " Column1Width="100">
+    </ToggleComponent>
+</div>
+@if (!OrderNow)
+{  
+    <div class="row">
+        <ToggleComponent Name="TodayComponent" Parent="this"
+            OvalTop="0" OvalLeft="62" OvalWidth="16" OvalRadius="50"
+            LabelFontSize="18" LabelColor="Coral" On="@Today" LabelTop="0"
+            Position="relative" Left="42" Top="32" NotifyParentOnChange="true"
+            CircleColor="Color.White" OvalBackgroundColorOff="Color.DarkRed" LabelClassName="textalignright"
+            CircleColorOff="Color.Firebrick" OvalBackgroundColorOn="Color.Coral"
+            CircleWidth="12" CircleHeight="12" Caption="Today ?: " Column1Width="100">
+        </ToggleComponent>
+        <img class="orderisforlater" src="Images/OrderIsForLater2.png" />        
+    </div>
+    @if (!Today)
+    {  
+        <div class="row">
+            <CalendarComponent Name="OrderDateControl" Unit="px" HeightUnit="px" Height="146"
+                Position="relative" ButtonHeight=25 ButtonWidth=24 CalendarTop="-112" CalendarLeft="64" 
+                Caption="Order Date:" Parent="this" ButtonTop = "-1" Width="224" Column2Width="128" 
+                ControlHeight="32" TextBoxHeight="22" ButtonLeft="-1" Theme="ThemeEnum.Black" 
+                LabelColor="Color.Coral" LabelFontName="Calibri" LabelFontSize="18"
+                Top="32" Left="-3" LabelClassName="down4 right2" TextBoxWidth="124" ZIndex="60">
+            </CalendarComponent>
+            <img class="orderisnotfortoday" src="Images/OrderIsNotForToday2.png" />
+        </div>
+    }
+    <div class="row">
+        <TimeComponent Name="StartTimeComponent" Parent="this"
+            LabelFontSize="18" LabelFontName="Calibri" LabelColor="@Color.Coral"
+            Column1Width="100" Caption="Start Time:" FontSize="16" Top="28" 
+            HoursTextBoxLeft="0" MinutesTextBoxWidth="20" Left="18"
+            MinutesTextBoxLeft="0"></TimeComponent>
+    </div>
+}

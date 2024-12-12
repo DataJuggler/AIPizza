@@ -1,4 +1,38 @@
 
+.flex-container 
+{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 28vw;
+    top: 20vh;
+    width: 40vw;
+    height: 20vh;    
+}
+.orderisforlater
+{
+    width: 80px;
+    height: 80px;
+    border: none;
+    outline: none;     
+    display: inline;
+    position: relative;
+    top: -64px;
+    left: 96px;
+    margin-bottom: -64px;
+}
+.orderisnotfortoday
+{    
+   width: 80px;
+    height: 80px;
+    border: none;
+    outline: none;     
+    display: inline;
+    position: relative;
+    top: -16px;
+    left: -382px;
+    margin-bottom: -64px;
+}
 .redbutton
 {
     border: none;
@@ -9,8 +43,7 @@
     color: white;
     height: 28px;
     width: 96px;
-    cursor: pointer;    
-    display: inline;
+    cursor: pointer;  
 }
 .redbuttonwide
 {
@@ -25,16 +58,6 @@
     cursor: pointer;    
     display: inline;
 }
-.flex-container 
-{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    left: 28vw;
-    top: 20vh;
-    width: 40vw;
-    height: 20vh;    
-}
 .row 
 {
     display: flex;
@@ -48,15 +71,16 @@
 }
 
 
-body, html {
+body, html
+{
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
-
-.fullscreenimage {
+.fullscreenimage
+{
     background-image: url('Images/Background.jpg');
     background-size: cover;
     background-position: center;

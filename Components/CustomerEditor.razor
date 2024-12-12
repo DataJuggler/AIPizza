@@ -26,19 +26,20 @@
     <div class="floatleft">
         <TextBoxComponent Name="CityControl" Parent="this" Caption="City:"
             ClassName="displayinlineblock" LabelColor="Coral" SendAllTextToParent="true"
-            Column1Width="100" TextBoxWidth="140" LabelClassName="down4 right2 fontsize18" Width="260">
+            Column1Width="100" TextBoxWidth="140" LabelClassName="down4 right2 fontsize18" 
+            Width="260">
         </TextBoxComponent>
     </div>
     <div>
     </div>
 </div>
 <div class="row">
-    <div class="floatleft">
+    <div class="floatleft textdonotwrap">
         <TextBoxComponent Name="StateControl" Parent="this" Caption="State:"
             ClassName="displayinlineblock" LabelColor="Coral" SendAllTextToParent="true"
             TextBoxTextColor="GhostWhite"
-            Column1Width="100" TextBoxWidth="140" LabelClassName="down4 right2 fontsize18"
-            Width="260" Text="TX" Enabled="false" TextBoxBackColor="gray">
+            Column1Width="100" TextBoxWidth="100" LabelClassName="down4 right2 fontsize18"
+            Width="220" Text="TX" Enabled="false" TextBoxBackColor="gray">
         </TextBoxComponent>
     </div>
     <div>
@@ -68,14 +69,15 @@
     </div>
 </div>
 <div class="row">
-    <div class="floatleft textdonotwrap right70">
-        <ToggleComponent Name="VIPClubControl" Parent="this" Width="60"
-            OvalTop="-22" OvalLeft="88" OvalWidth="24" OvalRadius="50"
-            LabelFontSize="18" LabelColor="Coral" On="false" 
-            CircleColor="Color.White" BackgroundColorOff="Color.DarkRed" BackgroundColorOn="Color.LightSalmon"
-            CircleColorOff="Color.Firebrick"
-            CircleWidth="14" CircleHeight="14" Caption="VIP Member: " Column1Width="100">
-        </ToggleComponent>
+    <div class="floatleft textdonotwrap">
+        <ToggleComponent Name="VIPControl" Parent="this"
+        OvalTop="0" OvalLeft="60" OvalWidth="16" OvalRadius="50"
+        LabelFontSize="18" LabelColor="Coral" On="false" LabelTop="0"
+        Position="relative" Left="4" Top="0" 
+        CircleColor="Color.White" OvalBackgroundColorOff="Color.DarkRed" 
+        CircleColorOff="Color.Firebrick" OvalBackgroundColorOn="Color.LightSalmon"
+        CircleWidth="12" CircleHeight="12" Caption="VIP Member: " Column1Width="100">
+    </ToggleComponent>
     </div>
     <div>
     </div>
