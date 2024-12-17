@@ -51,7 +51,9 @@
                 Position="relative" ButtonHeight=25 ButtonWidth=24 CalendarTop="-112" CalendarLeft="64" 
                 Caption="Order Date:" Parent="this" ButtonTop = "-1" Width="224" Column2Width="128" 
                 ControlHeight="32" TextBoxHeight="22" ButtonLeft="-1" Theme="ThemeEnum.Black" 
-                LabelColor="Color.Coral" LabelFontName="Calibri" LabelFontSize="18"
+                LabelColor="Color.Coral" LabelFontName="Calibri" LabelFontSize="18" DayRowColor="Color.Firebrick"
+                DayRowTextColor="Color.GhostWhite"
+                DateTitleLeft="-12" DateTitleTop="3" BottomRowLeft="-8" BottomRowBottom="3"
                 Top="32" Left="-3" LabelClassName="down4 right2" TextBoxWidth="124" ZIndex="60">
             </CalendarComponent>
             <img class="orderisnotfortoday" src="Images/OrderIsNotForToday2.png" />
@@ -60,8 +62,8 @@
     <div class="row">
         <TimeComponent Name="StartTimeComponent" Parent="this"
             LabelFontSize="18" LabelFontName="Calibri" LabelColor="@Color.Coral"
-            Column1Width="100" Caption="Start Time:" FontSize="16" Top="28" 
-            HoursTextBoxLeft="0" MinutesTextBoxWidth="20" Left="18"
+            Column1Width="100" Caption="Start Time:" FontSize="16" FontName="Calibri" Top="28"
+            HoursTextBoxLeft="0" MinutesTextBoxWidth="20" Left="18" 
             MinutesTextBoxLeft="0"></TimeComponent>
     </div>
 }

@@ -17,9 +17,10 @@ Setup:
 
 Data Source=(ServerName);Initial Catalog=AIPizza;Integrated Security=True;Encrypt=False;
 
+4. Create a System environment variable to AIPizzaConnString and set the value to your connectionstring.
+
 Tip: DataTier.NET listed above comes with a program called Connection Builder that you might think is worth the price.
 
 If you find this project or any of my projects worth the price, please a star on GitHub and consider subscribing to my YouTube channel.
 
 https://youtube.com/DataJuggler
-
