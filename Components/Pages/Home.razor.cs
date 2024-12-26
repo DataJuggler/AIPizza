@@ -59,6 +59,9 @@ namespace AIPizza.Components.Pages
             {
                 // Reset
                 ScreenType = ScreenTypeEnum.Default;
+
+                // Update the UI
+                Refresh();
             }
             #endregion
             

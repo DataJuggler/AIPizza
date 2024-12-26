@@ -13,8 +13,8 @@ namespace ObjectLibrary.Enumerations
     /// </summary>
     public enum OrderTypeEnum : int
     {
-        DineIn = 0,
-        Pickup = 1,
+        Dine_In = 0,
+        Pick_Up = 1,
         Delivery = 2        
     }
     #endregion

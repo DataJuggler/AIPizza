@@ -6,6 +6,7 @@ using DataJuggler.Blazor.Components;
 using DataJuggler.Blazor.Components.Interfaces;
 using DataJuggler.UltimateHelper;
 using Microsoft.AspNetCore.Components;
+using ObjectLibrary.Enumerations;
 
 #endregion
 
@@ -23,6 +24,7 @@ namespace AIPizza.Components
         private List<IBlazorComponent> children;
         private string name;
         private bool orderNow;        
+        private ComboBox orderTypeComboBox;
         private ToggleComponent orderNowComponent;
         private ToggleComponent todayComponent;
         private bool today;
@@ -113,7 +115,14 @@ namespace AIPizza.Components
                     {
                         // Store
                         TodayComponent = tempToggle;
-                    }
+                    }                    
+                }
+                else if (component is ComboBox comboBox)
+                {
+                    // Store
+                    OrderTypeComboBox = comboBox;
+
+                    OrderTypeComboBox.LoadItems(typeof(OrderTypeEnum));
                 }
             }
             #endregion
@@ -167,6 +176,23 @@ namespace AIPizza.Components
             }
             #endregion
                 
+            #region HasOrderTypeComboBox
+            /// <summary>
+            /// This property returns true if this object has an 'OrderTypeComboBox'.
+            /// </summary>
+            public bool HasOrderTypeComboBox
+            {
+                get
+                {
+                    // initial value
+                    bool hasOrderTypeComboBox = (this.OrderTypeComboBox != null);
+                    
+                    // return value
+                    return hasOrderTypeComboBox;
+                }
+            }
+            #endregion
+            
             #region HasTodayComponent
             /// <summary>
             /// This property returns true if this object has a 'TodayComponent'.
@@ -218,6 +244,17 @@ namespace AIPizza.Components
             }
             #endregion
                 
+            #region OrderTypeComboBox
+            /// <summary>
+            /// This property gets or sets the value for 'OrderTypeComboBox'.
+            /// </summary>
+            public ComboBox OrderTypeComboBox
+            {
+                get { return orderTypeComboBox; }
+                set { orderTypeComboBox = value; }
+            }
+            #endregion
+            
             #region Parent
             /// <summary>
             /// This property gets or sets the value for 'Parent'.
