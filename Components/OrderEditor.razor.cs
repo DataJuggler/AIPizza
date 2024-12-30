@@ -6,7 +6,9 @@ using DataJuggler.Blazor.Components;
 using DataJuggler.Blazor.Components.Interfaces;
 using DataJuggler.UltimateHelper;
 using Microsoft.AspNetCore.Components;
+using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
+using AIPizza.Components.Pages;
 
 #endregion
 
@@ -28,7 +30,7 @@ namespace AIPizza.Components
         private ToggleComponent orderNowComponent;
         private ToggleComponent todayComponent;
         private bool today;
-        private IBlazorComponentParent parent;
+        private IBlazorComponentParent parent;        
         #endregion
         
         #region Constructor
@@ -193,6 +195,23 @@ namespace AIPizza.Components
             }
             #endregion
             
+            #region HasParentHomePage
+            /// <summary>
+            /// This property returns true if this object has a 'ParentHomePage'.
+            /// </summary>
+            public bool HasParentHomePage
+            {
+                get
+                {
+                    // initial value
+                    bool hasParentHomePage = (this.ParentHomePage != null);
+                    
+                    // return value
+                    return hasParentHomePage;
+                }
+            }
+            #endregion
+            
             #region HasTodayComponent
             /// <summary>
             /// This property returns true if this object has a 'TodayComponent'.
@@ -264,6 +283,31 @@ namespace AIPizza.Components
             {
                 get { return parent; }
                 set { parent = value; }
+            }
+            #endregion
+
+            #region ParentHomePage
+            /// <summary>
+            /// This read only property returns the Parent if it is a Home object
+            /// </summary>
+            public Home ParentHomePage
+            {
+                
+                get
+                {
+                    // initial value
+                    Home home = null;
+                    
+                    // if Parent exists
+                    if (Parent is Home tempHome)
+                    {
+                        // set the return value
+                        home = tempHome;
+                    }
+                    
+                    // return value
+                    return home;
+                }
             }
             #endregion
                 

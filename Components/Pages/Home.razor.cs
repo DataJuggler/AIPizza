@@ -32,6 +32,7 @@ namespace AIPizza.Components.Pages
         private bool showStatusMessage;
         private CustomerEditor customerEditor;
         private InformationBox customerInfoBox;
+        private PizzaOrder currentOrder;
         #endregion
         
         #region Constructor
@@ -278,7 +279,18 @@ namespace AIPizza.Components.Pages
             set { currentCustomer = value; }
         }
         #endregion
-                
+            
+        #region CurrentOrder
+        /// <summary>
+        /// This property gets or sets the value for 'CurrentOrder'.
+        /// </summary>
+        public PizzaOrder CurrentOrder
+        {
+            get { return currentOrder; }
+            set { currentOrder = value; }
+        }
+        #endregion
+        
         #region CustomerEditor
         /// <summary>
         /// This property gets or sets the value for 'CustomerEditor'.
@@ -318,6 +330,23 @@ namespace AIPizza.Components.Pages
         }
         #endregion
                 
+        #region HasCurrentOrder
+        /// <summary>
+        /// This property returns true if this object has a 'CurrentOrder'.
+        /// </summary>
+        public bool HasCurrentOrder
+        {
+            get
+            {
+                // initial value
+                bool hasCurrentOrder = (this.CurrentOrder != null);
+                
+                // return value
+                return hasCurrentOrder;
+            }
+        }
+        #endregion
+        
         #region HasCustomerInfoBox
         /// <summary>
         /// This property returns true if this object has a 'CustomerInfoBox'.
