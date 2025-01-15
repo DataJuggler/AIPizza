@@ -67,7 +67,7 @@ namespace AIPizza.Components
                     if (TextHelper.Exists(phoneNumber))
                     {
                         // Create a new instance of a 'Gateway' object.
-                        Gateway gateway = new Gateway(Connection.Name);
+                        Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                         // Find the Customer
                         ParentHomePage.CurrentCustomer = gateway.FindCustomerByPhoneNumber(phoneNumber);

@@ -6,7 +6,7 @@ Go
 -- =========================================================
 -- Procure Name: Customer_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Insert a new Customer
 -- =========================================================
 
@@ -70,7 +70,7 @@ Go
 -- =========================================================
 -- Procure Name: Customer_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Update an existing Customer
 -- =========================================================
 
@@ -140,7 +140,7 @@ Go
 -- =========================================================
 -- Procure Name: Customer_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Find an existing Customer
 -- =========================================================
 
@@ -197,7 +197,7 @@ Go
 -- =========================================================
 -- Procure Name: Customer_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Delete an existing Customer
 -- =========================================================
 
@@ -251,7 +251,7 @@ Go
 -- =========================================================
 -- Procure Name: Customer_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Returns all Customer objects
 -- =========================================================
 
@@ -302,7 +302,7 @@ Go
 -- =========================================================
 -- Procure Name: OrderDetail_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Insert a new OrderDetail
 -- =========================================================
 
@@ -365,7 +365,7 @@ Go
 -- =========================================================
 -- Procure Name: OrderDetail_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Update an existing OrderDetail
 -- =========================================================
 
@@ -433,7 +433,7 @@ Go
 -- =========================================================
 -- Procure Name: OrderDetail_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Find an existing OrderDetail
 -- =========================================================
 
@@ -490,7 +490,7 @@ Go
 -- =========================================================
 -- Procure Name: OrderDetail_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Delete an existing OrderDetail
 -- =========================================================
 
@@ -544,7 +544,7 @@ Go
 -- =========================================================
 -- Procure Name: OrderDetail_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Returns all OrderDetail objects
 -- =========================================================
 
@@ -595,7 +595,7 @@ Go
 -- =========================================================
 -- Procure Name: PizzaOrder_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Insert a new PizzaOrder
 -- =========================================================
 
@@ -657,7 +657,7 @@ Go
 -- =========================================================
 -- Procure Name: PizzaOrder_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Update an existing PizzaOrder
 -- =========================================================
 
@@ -723,7 +723,7 @@ Go
 -- =========================================================
 -- Procure Name: PizzaOrder_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Find an existing PizzaOrder
 -- =========================================================
 
@@ -780,7 +780,7 @@ Go
 -- =========================================================
 -- Procure Name: PizzaOrder_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Delete an existing PizzaOrder
 -- =========================================================
 
@@ -834,7 +834,7 @@ Go
 -- =========================================================
 -- Procure Name: PizzaOrder_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
+-- Create Date:   1/15/2025
 -- Description:    Returns all PizzaOrder objects
 -- =========================================================
 
@@ -878,69 +878,6 @@ BEGIN
     From [PizzaOrder]
 
 END
-
--- Begin Custom Methods
-
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
--- Procure Name: Customer_FindByPhoneNumber
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   11/30/2024
--- Description:    Find an existing Customer for the PhoneNumber given.
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('Customer_FindByPhoneNumber'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure Customer_FindByPhoneNumber
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.Customer_FindByPhoneNumber') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure Customer_FindByPhoneNumber >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure Customer_FindByPhoneNumber >>>'
-
-    End
-
-GO
-
-Create PROCEDURE Customer_FindByPhoneNumber
-
-    -- Create @PhoneNumber Paramater
-    @PhoneNumber nvarchar(20)
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Select Statement
-    Select [Address],[City],[Id],[Name],[PhoneNumber],[State],[VIPClub],[ZipCode]
-
-    -- From tableName
-    From [Customer]
-
-    -- Find Matching Record
-    Where [PhoneNumber] = @PhoneNumber
-
-END
-
-
--- End Custom Methods
 
 -- Thank you for using DataTier.Net.
 

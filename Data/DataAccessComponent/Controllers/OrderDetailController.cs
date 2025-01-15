@@ -2,6 +2,7 @@
 
 #region using statements
 
+using DataAccessComponent.Data;
 using DataAccessComponent.DataBridge;
 using DataAccessComponent.DataOperations;
 using DataAccessComponent.Logging;
@@ -21,23 +22,6 @@ namespace DataAccessComponent.Controllers
     /// </summary>
     public class OrderDetailController
     {
-
-        #region Private Variables
-        private ErrorHandler errorProcessor;
-        private ApplicationController appController;
-        #endregion
-
-        #region Constructor
-        /// <summary>
-        /// Creates a new 'OrderDetailController' object.
-        /// </summary>
-        public OrderDetailController(ErrorHandler errorProcessorArg, ApplicationController appControllerArg)
-        {
-            // Save Arguments
-            this.ErrorProcessor = errorProcessorArg;
-            this.AppController = appControllerArg;
-        }
-        #endregion
 
         #region Methods
 
@@ -67,15 +51,15 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Delete(OrderDetail tempOrderDetail)
+            #region Delete(OrderDetail tempOrderDetail, DataManager dataManager)
             /// <summary>
             /// Deletes a 'OrderDetail' from the database
-            /// This method calls the DataBridgeManager to execute the delete using the
+            /// This method calls the DataBridgeManager to execute the delete
             /// procedure 'OrderDetail_Delete'.
             /// </summary>
             /// <param name='orderdetail'>The 'OrderDetail' to delete.</param>
             /// <returns>True if the delete is successful or false if not.</returns>
-            public bool Delete(OrderDetail tempOrderDetail)
+            public static bool Delete(OrderDetail tempOrderDetail, DataManager dataManager)
             {
                 // locals
                 bool deleted = false;
@@ -87,16 +71,16 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // verify temporderDetail exists before attemptintg to delete
-                    if(tempOrderDetail != null)
+                    if (tempOrderDetail != null)
                     {
                         // Create Delegate For DataOperation
-                        ApplicationController.DataOperationMethod deleteOrderDetailMethod = this.AppController.DataBridge.DataOperations.OrderDetailMethods.DeleteOrderDetail;
+                        ApplicationController.DataOperationMethod deleteOrderDetailMethod = OrderDetailMethods.DeleteOrderDetail;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateOrderDetailParameter(tempOrderDetail);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, deleteOrderDetailMethod, parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteOrderDetailMethod, parameters, dataManager);
 
                         // If return object exists
                         if (returnObject != null)
@@ -112,12 +96,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -125,14 +105,14 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region FetchAll(OrderDetail tempOrderDetail)
+            #region FetchAll(OrderDetail tempOrderDetail, DataManager dataManager)
             /// <summary>
             /// This method fetches a collection of 'OrderDetail' objects.
             /// This method used the DataBridgeManager to execute the fetch all using the
             /// procedure 'OrderDetail_FetchAll'.</summary>
             /// <param name='tempOrderDetail'>A temporary OrderDetail for passing values.</param>
             /// <returns>A collection of 'OrderDetail' objects.</returns>
-            public List<OrderDetail> FetchAll(OrderDetail tempOrderDetail)
+            public static List<OrderDetail> FetchAll(OrderDetail tempOrderDetail, DataManager dataManager)
             {
                 // Initial value
                 List<OrderDetail> orderDetailList = null;
@@ -144,13 +124,13 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // Create DataOperation Method
-                    ApplicationController.DataOperationMethod fetchAllMethod = this.AppController.DataBridge.DataOperations.OrderDetailMethods.FetchAll;
+                    ApplicationController.DataOperationMethod fetchAllMethod = OrderDetailMethods.FetchAll;
 
                     // Create parameters for this method
                     List<PolymorphicObject> parameters = CreateOrderDetailParameter(tempOrderDetail);
 
                     // Perform DataOperation
-                    PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, fetchAllMethod , parameters);
+                    PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, fetchAllMethod , parameters, dataManager);
 
                     // If return object exists
                     if ((returnObject != null) && (returnObject.ObjectValue as List<OrderDetail> != null))
@@ -161,12 +141,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -174,7 +150,7 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Find(OrderDetail tempOrderDetail)
+            #region Find(OrderDetail tempOrderDetail, DataManager dataManager)
             /// <summary>
             /// Finds a 'OrderDetail' object by the primary key.
             /// This method used the DataBridgeManager to execute the 'Find' using the
@@ -182,7 +158,7 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='tempOrderDetail'>A temporary OrderDetail for passing values.</param>
             /// <returns>A 'OrderDetail' object if found else a null 'OrderDetail'.</returns>
-            public OrderDetail Find(OrderDetail tempOrderDetail)
+            public static OrderDetail Find(OrderDetail tempOrderDetail, DataManager dataManager)
             {
                 // Initial values
                 OrderDetail orderDetail = null;
@@ -194,16 +170,16 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // If object exists
-                    if(tempOrderDetail != null)
+                    if (tempOrderDetail != null)
                     {
                         // Create DataOperation
-                        ApplicationController.DataOperationMethod findMethod = this.AppController.DataBridge.DataOperations.OrderDetailMethods.FindOrderDetail;
+                        ApplicationController.DataOperationMethod findMethod = OrderDetailMethods.FindOrderDetail;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateOrderDetailParameter(tempOrderDetail);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, findMethod , parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, findMethod , parameters, dataManager);
 
                         // If return object exists
                         if ((returnObject != null) && (returnObject.ObjectValue as OrderDetail != null))
@@ -215,12 +191,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -228,7 +200,7 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Insert(OrderDetail orderDetail)
+            #region Insert(OrderDetail orderDetail, DataManager dataManager)
             /// <summary>
             /// Insert a 'OrderDetail' object into the database.
             /// This method uses the DataBridgeManager to execute the 'Insert' using the
@@ -236,7 +208,7 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='orderDetail'>The 'OrderDetail' object to insert.</param>
             /// <returns>The id (int) of the new  'OrderDetail' object that was inserted.</returns>
-            public int Insert(OrderDetail orderDetail)
+            public static int Insert(OrderDetail orderDetail, DataManager dataManager)
             {
                 // Initial values
                 int newIdentity = -1;
@@ -248,15 +220,15 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // If OrderDetailexists
-                    if(orderDetail != null)
+                    if (orderDetail != null)
                     {
-                        ApplicationController.DataOperationMethod insertMethod = this.AppController.DataBridge.DataOperations.OrderDetailMethods.InsertOrderDetail;
+                        ApplicationController.DataOperationMethod insertMethod = OrderDetailMethods.InsertOrderDetail;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateOrderDetailParameter(orderDetail);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, insertMethod , parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
 
                         // If return object exists
                         if (returnObject != null)
@@ -268,12 +240,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -281,29 +249,29 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Save(ref OrderDetail orderDetail)
+            #region Save(ref OrderDetail orderDetail, DataManager dataManager)
             /// <summary>
             /// Saves a 'OrderDetail' object into the database.
             /// This method calls the 'Insert' or 'Update' method.
             /// </summary>
             /// <param name='orderDetail'>The 'OrderDetail' object to save.</param>
             /// <returns>True if successful or false if not.</returns>
-            public bool Save(ref OrderDetail orderDetail)
+            public static bool Save(ref OrderDetail orderDetail, DataManager dataManager)
             {
                 // Initial value
                 bool saved = false;
 
                 // If the orderDetail exists.
-                if(orderDetail != null)
+                if (orderDetail != null)
                 {
                     // Is this a new OrderDetail
-                    if(orderDetail.IsNew)
+                    if (orderDetail.IsNew)
                     {
                         // Insert new OrderDetail
-                        int newIdentity = this.Insert(orderDetail);
+                        int newIdentity = Insert(orderDetail, dataManager);
 
                         // if insert was successful
-                        if(newIdentity > 0)
+                        if (newIdentity > 0)
                         {
                             // Update Identity
                             orderDetail.UpdateIdentity(newIdentity);
@@ -315,7 +283,7 @@ namespace DataAccessComponent.Controllers
                     else
                     {
                         // Update OrderDetail
-                        saved = this.Update(orderDetail);
+                        saved = Update(orderDetail, dataManager);
                     }
                 }
 
@@ -324,7 +292,7 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Update(OrderDetail orderDetail)
+            #region Update(OrderDetail orderDetail, DataManager dataManager)
             /// <summary>
             /// This method Updates a 'OrderDetail' object in the database.
             /// This method used the DataBridgeManager to execute the 'Update' using the
@@ -332,7 +300,7 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='orderDetail'>The 'OrderDetail' object to update.</param>
             /// <returns>True if successful else false if not.</returns>
-            public bool Update(OrderDetail orderDetail)
+            public static bool Update(OrderDetail orderDetail, DataManager dataManager)
             {
                 // Initial value
                 bool saved = false;
@@ -343,15 +311,15 @@ namespace DataAccessComponent.Controllers
 
                 try
                 {
-                    if(orderDetail != null)
+                    if (orderDetail != null)
                     {
                         // Create Delegate
-                        ApplicationController.DataOperationMethod updateMethod = this.AppController.DataBridge.DataOperations.OrderDetailMethods.UpdateOrderDetail;
+                        ApplicationController.DataOperationMethod updateMethod = OrderDetailMethods.UpdateOrderDetail;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateOrderDetailParameter(orderDetail);
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, updateMethod , parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
 
                         // If return object exists
                         if ((returnObject != null) && (returnObject.Boolean != null) && (returnObject.Boolean.Value == NullableBooleanEnum.True))
@@ -363,36 +331,12 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
                 return saved;
-            }
-            #endregion
-
-        #endregion
-
-        #region Properties
-
-            #region AppController
-            public ApplicationController AppController
-            {
-                get { return appController; }
-                set { appController = value; }
-            }
-            #endregion
-
-            #region ErrorProcessor
-            public ErrorHandler ErrorProcessor
-            {
-                get { return errorProcessor; }
-                set { errorProcessor = value; }
             }
             #endregion
 

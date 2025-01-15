@@ -2,6 +2,7 @@
 
 #region using statements
 
+using DataAccessComponent.Data;
 using DataAccessComponent.DataBridge;
 using DataAccessComponent.DataOperations;
 using DataAccessComponent.Logging;
@@ -21,23 +22,6 @@ namespace DataAccessComponent.Controllers
     /// </summary>
     public class PizzaOrderController
     {
-
-        #region Private Variables
-        private ErrorHandler errorProcessor;
-        private ApplicationController appController;
-        #endregion
-
-        #region Constructor
-        /// <summary>
-        /// Creates a new 'PizzaOrderController' object.
-        /// </summary>
-        public PizzaOrderController(ErrorHandler errorProcessorArg, ApplicationController appControllerArg)
-        {
-            // Save Arguments
-            this.ErrorProcessor = errorProcessorArg;
-            this.AppController = appControllerArg;
-        }
-        #endregion
 
         #region Methods
 
@@ -67,15 +51,15 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Delete(PizzaOrder tempPizzaOrder)
+            #region Delete(PizzaOrder tempPizzaOrder, DataManager dataManager)
             /// <summary>
             /// Deletes a 'PizzaOrder' from the database
-            /// This method calls the DataBridgeManager to execute the delete using the
+            /// This method calls the DataBridgeManager to execute the delete
             /// procedure 'PizzaOrder_Delete'.
             /// </summary>
             /// <param name='pizzaorder'>The 'PizzaOrder' to delete.</param>
             /// <returns>True if the delete is successful or false if not.</returns>
-            public bool Delete(PizzaOrder tempPizzaOrder)
+            public static bool Delete(PizzaOrder tempPizzaOrder, DataManager dataManager)
             {
                 // locals
                 bool deleted = false;
@@ -87,16 +71,16 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // verify temppizzaOrder exists before attemptintg to delete
-                    if(tempPizzaOrder != null)
+                    if (tempPizzaOrder != null)
                     {
                         // Create Delegate For DataOperation
-                        ApplicationController.DataOperationMethod deletePizzaOrderMethod = this.AppController.DataBridge.DataOperations.PizzaOrderMethods.DeletePizzaOrder;
+                        ApplicationController.DataOperationMethod deletePizzaOrderMethod = PizzaOrderMethods.DeletePizzaOrder;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreatePizzaOrderParameter(tempPizzaOrder);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, deletePizzaOrderMethod, parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, deletePizzaOrderMethod, parameters, dataManager);
 
                         // If return object exists
                         if (returnObject != null)
@@ -112,12 +96,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -125,14 +105,14 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region FetchAll(PizzaOrder tempPizzaOrder)
+            #region FetchAll(PizzaOrder tempPizzaOrder, DataManager dataManager)
             /// <summary>
             /// This method fetches a collection of 'PizzaOrder' objects.
             /// This method used the DataBridgeManager to execute the fetch all using the
             /// procedure 'PizzaOrder_FetchAll'.</summary>
             /// <param name='tempPizzaOrder'>A temporary PizzaOrder for passing values.</param>
             /// <returns>A collection of 'PizzaOrder' objects.</returns>
-            public List<PizzaOrder> FetchAll(PizzaOrder tempPizzaOrder)
+            public static List<PizzaOrder> FetchAll(PizzaOrder tempPizzaOrder, DataManager dataManager)
             {
                 // Initial value
                 List<PizzaOrder> pizzaOrderList = null;
@@ -144,13 +124,13 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // Create DataOperation Method
-                    ApplicationController.DataOperationMethod fetchAllMethod = this.AppController.DataBridge.DataOperations.PizzaOrderMethods.FetchAll;
+                    ApplicationController.DataOperationMethod fetchAllMethod = PizzaOrderMethods.FetchAll;
 
                     // Create parameters for this method
                     List<PolymorphicObject> parameters = CreatePizzaOrderParameter(tempPizzaOrder);
 
                     // Perform DataOperation
-                    PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, fetchAllMethod , parameters);
+                    PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, fetchAllMethod , parameters, dataManager);
 
                     // If return object exists
                     if ((returnObject != null) && (returnObject.ObjectValue as List<PizzaOrder> != null))
@@ -161,12 +141,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -174,7 +150,7 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Find(PizzaOrder tempPizzaOrder)
+            #region Find(PizzaOrder tempPizzaOrder, DataManager dataManager)
             /// <summary>
             /// Finds a 'PizzaOrder' object by the primary key.
             /// This method used the DataBridgeManager to execute the 'Find' using the
@@ -182,7 +158,7 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='tempPizzaOrder'>A temporary PizzaOrder for passing values.</param>
             /// <returns>A 'PizzaOrder' object if found else a null 'PizzaOrder'.</returns>
-            public PizzaOrder Find(PizzaOrder tempPizzaOrder)
+            public static PizzaOrder Find(PizzaOrder tempPizzaOrder, DataManager dataManager)
             {
                 // Initial values
                 PizzaOrder pizzaOrder = null;
@@ -194,16 +170,16 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // If object exists
-                    if(tempPizzaOrder != null)
+                    if (tempPizzaOrder != null)
                     {
                         // Create DataOperation
-                        ApplicationController.DataOperationMethod findMethod = this.AppController.DataBridge.DataOperations.PizzaOrderMethods.FindPizzaOrder;
+                        ApplicationController.DataOperationMethod findMethod = PizzaOrderMethods.FindPizzaOrder;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreatePizzaOrderParameter(tempPizzaOrder);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, findMethod , parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, findMethod , parameters, dataManager);
 
                         // If return object exists
                         if ((returnObject != null) && (returnObject.ObjectValue as PizzaOrder != null))
@@ -215,12 +191,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -228,7 +200,7 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Insert(PizzaOrder pizzaOrder)
+            #region Insert(PizzaOrder pizzaOrder, DataManager dataManager)
             /// <summary>
             /// Insert a 'PizzaOrder' object into the database.
             /// This method uses the DataBridgeManager to execute the 'Insert' using the
@@ -236,7 +208,7 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='pizzaOrder'>The 'PizzaOrder' object to insert.</param>
             /// <returns>The id (int) of the new  'PizzaOrder' object that was inserted.</returns>
-            public int Insert(PizzaOrder pizzaOrder)
+            public static int Insert(PizzaOrder pizzaOrder, DataManager dataManager)
             {
                 // Initial values
                 int newIdentity = -1;
@@ -248,15 +220,15 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // If PizzaOrderexists
-                    if(pizzaOrder != null)
+                    if (pizzaOrder != null)
                     {
-                        ApplicationController.DataOperationMethod insertMethod = this.AppController.DataBridge.DataOperations.PizzaOrderMethods.InsertPizzaOrder;
+                        ApplicationController.DataOperationMethod insertMethod = PizzaOrderMethods.InsertPizzaOrder;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreatePizzaOrderParameter(pizzaOrder);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, insertMethod , parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
 
                         // If return object exists
                         if (returnObject != null)
@@ -268,12 +240,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -281,29 +249,29 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Save(ref PizzaOrder pizzaOrder)
+            #region Save(ref PizzaOrder pizzaOrder, DataManager dataManager)
             /// <summary>
             /// Saves a 'PizzaOrder' object into the database.
             /// This method calls the 'Insert' or 'Update' method.
             /// </summary>
             /// <param name='pizzaOrder'>The 'PizzaOrder' object to save.</param>
             /// <returns>True if successful or false if not.</returns>
-            public bool Save(ref PizzaOrder pizzaOrder)
+            public static bool Save(ref PizzaOrder pizzaOrder, DataManager dataManager)
             {
                 // Initial value
                 bool saved = false;
 
                 // If the pizzaOrder exists.
-                if(pizzaOrder != null)
+                if (pizzaOrder != null)
                 {
                     // Is this a new PizzaOrder
-                    if(pizzaOrder.IsNew)
+                    if (pizzaOrder.IsNew)
                     {
                         // Insert new PizzaOrder
-                        int newIdentity = this.Insert(pizzaOrder);
+                        int newIdentity = Insert(pizzaOrder, dataManager);
 
                         // if insert was successful
-                        if(newIdentity > 0)
+                        if (newIdentity > 0)
                         {
                             // Update Identity
                             pizzaOrder.UpdateIdentity(newIdentity);
@@ -315,7 +283,7 @@ namespace DataAccessComponent.Controllers
                     else
                     {
                         // Update PizzaOrder
-                        saved = this.Update(pizzaOrder);
+                        saved = Update(pizzaOrder, dataManager);
                     }
                 }
 
@@ -324,7 +292,7 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Update(PizzaOrder pizzaOrder)
+            #region Update(PizzaOrder pizzaOrder, DataManager dataManager)
             /// <summary>
             /// This method Updates a 'PizzaOrder' object in the database.
             /// This method used the DataBridgeManager to execute the 'Update' using the
@@ -332,7 +300,7 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='pizzaOrder'>The 'PizzaOrder' object to update.</param>
             /// <returns>True if successful else false if not.</returns>
-            public bool Update(PizzaOrder pizzaOrder)
+            public static bool Update(PizzaOrder pizzaOrder, DataManager dataManager)
             {
                 // Initial value
                 bool saved = false;
@@ -343,15 +311,15 @@ namespace DataAccessComponent.Controllers
 
                 try
                 {
-                    if(pizzaOrder != null)
+                    if (pizzaOrder != null)
                     {
                         // Create Delegate
-                        ApplicationController.DataOperationMethod updateMethod = this.AppController.DataBridge.DataOperations.PizzaOrderMethods.UpdatePizzaOrder;
+                        ApplicationController.DataOperationMethod updateMethod = PizzaOrderMethods.UpdatePizzaOrder;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreatePizzaOrderParameter(pizzaOrder);
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, updateMethod , parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
 
                         // If return object exists
                         if ((returnObject != null) && (returnObject.Boolean != null) && (returnObject.Boolean.Value == NullableBooleanEnum.True))
@@ -363,36 +331,12 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
                 return saved;
-            }
-            #endregion
-
-        #endregion
-
-        #region Properties
-
-            #region AppController
-            public ApplicationController AppController
-            {
-                get { return appController; }
-                set { appController = value; }
-            }
-            #endregion
-
-            #region ErrorProcessor
-            public ErrorHandler ErrorProcessor
-            {
-                get { return errorProcessor; }
-                set { errorProcessor = value; }
             }
             #endregion
 

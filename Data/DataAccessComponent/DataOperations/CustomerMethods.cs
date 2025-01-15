@@ -23,23 +23,8 @@ namespace DataAccessComponent.DataOperations
     /// <summary>
     /// This class contains methods for modifying a 'Customer' object.
     /// </summary>
-    public class CustomerMethods
+    public static class CustomerMethods
     {
-
-        #region Private Variables
-        private DataManager dataManager;
-        #endregion
-
-        #region Constructor
-        /// <summary>
-        /// Creates a new Creates a new 'CustomerMethods' object.
-        /// </summary>
-        public CustomerMethods(DataManager dataManagerArg)
-        {
-            // Save Argument
-            this.DataManager = dataManagerArg;
-        }
-        #endregion
 
         #region Methods
 
@@ -49,7 +34,7 @@ namespace DataAccessComponent.DataOperations
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'Customer' to delete.
             /// <returns>A PolymorphicObject object with a Boolean value.
-            internal PolymorphicObject DeleteCustomer(List<PolymorphicObject> parameters, DataConnector dataConnector)
+            internal static PolymorphicObject DeleteCustomer(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
                 PolymorphicObject returnObject = new PolymorphicObject();
@@ -115,7 +100,7 @@ namespace DataAccessComponent.DataOperations
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'Customer' to delete.
             /// <returns>A PolymorphicObject object with all  'Customers' objects.
-            internal PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)
+            internal static PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
                 PolymorphicObject returnObject = new PolymorphicObject();
@@ -174,7 +159,7 @@ namespace DataAccessComponent.DataOperations
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'Customer' to delete.
             /// <returns>A PolymorphicObject object with a Boolean value.
-            internal PolymorphicObject FindCustomer(List<PolymorphicObject> parameters, DataConnector dataConnector)
+            internal static PolymorphicObject FindCustomer(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
                 PolymorphicObject returnObject = new PolymorphicObject();
@@ -235,7 +220,7 @@ namespace DataAccessComponent.DataOperations
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'Customer' to insert.
             /// <returns>A PolymorphicObject object with a Boolean value.
-            internal PolymorphicObject InsertCustomer(List<PolymorphicObject> parameters, DataConnector dataConnector)
+            internal static PolymorphicObject InsertCustomer(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
                 PolymorphicObject returnObject = new PolymorphicObject();
@@ -290,7 +275,7 @@ namespace DataAccessComponent.DataOperations
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'Customer' to update.
             /// <returns>A PolymorphicObject object with a value.
-            internal PolymorphicObject UpdateCustomer(List<PolymorphicObject> parameters, DataConnector dataConnector)
+            internal static PolymorphicObject UpdateCustomer(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
                 PolymorphicObject returnObject = new PolymorphicObject();
@@ -350,18 +335,6 @@ namespace DataAccessComponent.DataOperations
 
                 // return value
                 return returnObject;
-            }
-            #endregion
-
-        #endregion
-
-        #region Properties
-
-            #region DataManager 
-            public DataManager DataManager 
-            {
-                get { return dataManager; }
-                set { dataManager = value; }
             }
             #endregion
 

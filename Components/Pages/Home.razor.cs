@@ -24,8 +24,7 @@ namespace AIPizza.Components.Pages
     public partial class Home : IBlazorComponentParent
     {
         
-        #region Private Variables
-        private List<IBlazorComponent> children;
+        #region Private Variables        
         private Customer currentCustomer;
         private ScreenTypeEnum screenType;           
         private Label statusLabel;
@@ -41,8 +40,6 @@ namespace AIPizza.Components.Pages
         /// </summary>
         public Home()
         {
-            // Create a new collection of 'IBlazorComponent' objects.
-            Children = new List<IBlazorComponent>();
         }
         #endregion
         
@@ -257,17 +254,6 @@ namespace AIPizza.Components.Pages
         #endregion
             
         #region Properties
-                
-        #region Children
-        /// <summary>
-        /// This property gets or sets the value for 'Children'.
-        /// </summary>
-        public List<IBlazorComponent> Children
-        {
-            get { return children; }
-            set { children = value; }
-        }
-        #endregion
                 
         #region CurrentCustomer
         /// <summary>

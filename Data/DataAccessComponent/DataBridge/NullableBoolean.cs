@@ -1,5 +1,4 @@
 
-
 #region using statements
 
 using System;
@@ -7,7 +6,6 @@ using System.Collections.Generic;
 using System.Text;
 
 #endregion
-
 
 namespace DataAccessComponent.DataBridge
 {
@@ -21,7 +19,7 @@ namespace DataAccessComponent.DataBridge
     {
 
         #region Private Variables
-        private NullableBooleanEnum value;
+        private NullableBooleanEnum _value;
         #endregion
 
         #region Constructors
@@ -33,7 +31,7 @@ namespace DataAccessComponent.DataBridge
         public NullableBoolean()
         {
             // Set Value
-            this.Value = NullableBooleanEnum.Null;
+            Value = NullableBooleanEnum.Null;
         }
         #endregion
 
@@ -47,12 +45,12 @@ namespace DataAccessComponent.DataBridge
             if (objectValue == true)
             {
                 // Set value to true
-                this.Value = NullableBooleanEnum.True;
+                Value = NullableBooleanEnum.True;
             }
             else
             {
                 // Set value to false
-                this.Value = NullableBooleanEnum.False;
+                Value = NullableBooleanEnum.False;
             }
         }
         #endregion
@@ -67,8 +65,8 @@ namespace DataAccessComponent.DataBridge
         /// </summary>
         public NullableBooleanEnum Value
         {
-            get { return this.value; }
-            set { this.value = value; }
+            get { return _value; }
+            set { _value = value; }
         }
         #endregion
 

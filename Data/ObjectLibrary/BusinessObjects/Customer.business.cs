@@ -39,7 +39,7 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
-            #region IsValid(ref string invalidReason)
+             #region IsValid(ref string invalidReason)
             /// <summary>
             /// returns the Valid
             /// </summary>
@@ -90,7 +90,7 @@ namespace ObjectLibrary.BusinessObjects
                 return isValid;
             }
             #endregion
-            
+
         #endregion
 
         #region Properties

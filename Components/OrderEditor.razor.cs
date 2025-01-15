@@ -50,6 +50,20 @@ namespace AIPizza.Components
         
         #region Methods
             
+            #region Cancel()
+            /// <summary>
+            /// Cancel
+            /// </summary>
+            public void Cancel()
+            {
+                if (HasParentHomePage)
+                {
+                    // Click Cancel
+                    ParentHomePage.Cancel();
+                }
+            }
+            #endregion
+            
             #region Init()
             /// <summary>
             ///  This method performs initializations for this object.
@@ -129,6 +143,15 @@ namespace AIPizza.Components
             }
             #endregion
                 
+            #region Save()
+            /// <summary>
+            /// Save
+            /// </summary>
+            public void Save()
+            {
+            }
+            #endregion
+            
         #endregion
             
         #region Properties

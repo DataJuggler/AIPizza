@@ -21,7 +21,7 @@ namespace ObjectLibrary.BusinessObjects
         private bool filled;
         private int id;
         private DateTime orderDate;
-        private OrderTypeEnum orderType;
+        private int orderType;
         #endregion
 
         #region Methods
@@ -108,8 +108,8 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
-            #region OrderTypeEnum OrderType
-            public OrderTypeEnum OrderType
+            #region int OrderType
+            public int OrderType
             {
                 get
                 {

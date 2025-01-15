@@ -29,17 +29,17 @@ namespace DataAccessComponent.DataGateway
 
         #region Private Variables
         private ApplicationController appController;
-        private string connectionName;
+        private string connectionName;        
         #endregion
 
         #region Constructor
         /// <summary>
         /// Create a new instance of a Gateway object.
         /// </summary>
-        public Gateway(string connectionName = "")
+        public Gateway(string connectionName)
         {
             // store the ConnectionName
-            this.ConnectionName = connectionName;
+            ConnectionName = connectionName;
 
             // Perform Initializations for this object
             Init();
@@ -60,7 +60,7 @@ namespace DataAccessComponent.DataGateway
                 bool deleted = false;
         
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // if the tempCustomer does not exist
                     if (tempCustomer == null)
@@ -77,7 +77,7 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = this.AppController.ControllerManager.CustomerController.Delete(tempCustomer);
+                    deleted = CustomerController.Delete(tempCustomer, DataManager);
                 }
         
                 // return value
@@ -97,7 +97,7 @@ namespace DataAccessComponent.DataGateway
                 bool deleted = false;
         
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // if the tempOrderDetail does not exist
                     if (tempOrderDetail == null)
@@ -114,7 +114,7 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = this.AppController.ControllerManager.OrderDetailController.Delete(tempOrderDetail);
+                    deleted = OrderDetailController.Delete(tempOrderDetail, DataManager);
                 }
         
                 // return value
@@ -134,7 +134,7 @@ namespace DataAccessComponent.DataGateway
                 bool deleted = false;
         
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // if the tempPizzaOrder does not exist
                     if (tempPizzaOrder == null)
@@ -151,7 +151,7 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = this.AppController.ControllerManager.PizzaOrderController.Delete(tempPizzaOrder);
+                    deleted = PizzaOrderController.Delete(tempPizzaOrder, DataManager);
                 }
         
                 // return value
@@ -217,7 +217,7 @@ namespace DataAccessComponent.DataGateway
                 Customer customer = null;
 
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // if the tempCustomer does not exist
                     if (tempCustomer == null)
@@ -234,7 +234,7 @@ namespace DataAccessComponent.DataGateway
                     }
 
                     // perform the find
-                    customer = this.AppController.ControllerManager.CustomerController.Find(tempCustomer);
+                    customer = CustomerController.Find(tempCustomer, DataManager);
                 }
 
                 // return value
@@ -242,32 +242,32 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
-                #region FindCustomerByPhoneNumber(string phoneNumber)
-                /// <summary>
-                /// This method is used to find 'Customer' objects for the PhoneNumber given.
-                /// </summary>
-                public Customer FindCustomerByPhoneNumber(string phoneNumber)
-                {
-                    // initial value
-                    Customer customer = null;
-                    
-                    // Create a temp Customer object
-                    Customer tempCustomer = new Customer();
-                    
-                    // Set the value for FindByPhoneNumber to true
-                    tempCustomer.FindByPhoneNumber = true;
-                    
-                    // Set the value for PhoneNumber
-                    tempCustomer.PhoneNumber = phoneNumber;
-                    
-                    // Perform the find
-                    customer = FindCustomer(0, tempCustomer);
-                    
-                    // return value
-                    return customer;
-                }
-                #endregion
+            #region FindCustomerByPhoneNumber(string phoneNumber)
+            /// <summary>
+            /// This method is used to find 'Customer' objects for the PhoneNumber given.
+            /// </summary>
+            public Customer FindCustomerByPhoneNumber(string phoneNumber)
+            {
+                // initial value
+                Customer customer = null;
                 
+                // Create a temp Customer object
+                Customer tempCustomer = new Customer();
+                
+                // Set the value for FindByPhoneNumber to true
+                tempCustomer.FindByPhoneNumber = true;
+                
+                // Set the value for PhoneNumber
+                tempCustomer.PhoneNumber = phoneNumber;
+                
+                // Perform the find
+                customer = FindCustomer(0, tempCustomer);
+                
+                // return value
+                return customer;
+            }
+            #endregion
+            
             #region FindOrderDetail(int id, OrderDetail tempOrderDetail = null)
             /// <summary>
             /// This method is used to find 'OrderDetail' objects.
@@ -280,7 +280,7 @@ namespace DataAccessComponent.DataGateway
                 OrderDetail orderDetail = null;
 
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // if the tempOrderDetail does not exist
                     if (tempOrderDetail == null)
@@ -297,7 +297,7 @@ namespace DataAccessComponent.DataGateway
                     }
 
                     // perform the find
-                    orderDetail = this.AppController.ControllerManager.OrderDetailController.Find(tempOrderDetail);
+                    orderDetail = OrderDetailController.Find(tempOrderDetail, DataManager);
                 }
 
                 // return value
@@ -317,7 +317,7 @@ namespace DataAccessComponent.DataGateway
                 PizzaOrder pizzaOrder = null;
 
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // if the tempPizzaOrder does not exist
                     if (tempPizzaOrder == null)
@@ -334,7 +334,7 @@ namespace DataAccessComponent.DataGateway
                     }
 
                     // perform the find
-                    pizzaOrder = this.AppController.ControllerManager.PizzaOrderController.Find(tempPizzaOrder);
+                    pizzaOrder = PizzaOrderController.Find(tempPizzaOrder, DataManager);
                 }
 
                 // return value
@@ -353,10 +353,10 @@ namespace DataAccessComponent.DataGateway
                 DataConnector dataConnector = null;
 
                 // if the AppController exists
-                if (this.AppController != null)
+                if (AppController != null)
                 {
                     // return the DataConnector from the AppController
-                    dataConnector = this.AppController.GetDataConnector();
+                    dataConnector = AppController.GetDataConnector();
                 }
 
                 // return value
@@ -377,13 +377,13 @@ namespace DataAccessComponent.DataGateway
                 Exception exception = null;
 
                 // If the AppController object exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // return the Exception from the AppController
-                    exception = this.AppController.Exception;
+                    exception = AppController.Exception;
 
                     // Set to null after the exception is retrieved so it does not return again
-                    this.AppController.Exception = null;
+                    AppController.Exception = null;
                 }
 
                 // return value
@@ -398,7 +398,7 @@ namespace DataAccessComponent.DataGateway
             private void Init()
             {
                 // Create Application Controller
-                this.AppController = new ApplicationController(ConnectionName);
+                AppController = new ApplicationController(ConnectionName);
             }
             #endregion
 
@@ -412,10 +412,10 @@ namespace DataAccessComponent.DataGateway
                 List<Customer> customers = null;
 
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // perform the load
-                    customers = this.AppController.ControllerManager.CustomerController.FetchAll(tempCustomer);
+                    customers = CustomerController.FetchAll(tempCustomer, DataManager);
                 }
 
                 // return value
@@ -433,10 +433,10 @@ namespace DataAccessComponent.DataGateway
                 List<OrderDetail> orderDetails = null;
 
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // perform the load
-                    orderDetails = this.AppController.ControllerManager.OrderDetailController.FetchAll(tempOrderDetail);
+                    orderDetails = OrderDetailController.FetchAll(tempOrderDetail, DataManager);
                 }
 
                 // return value
@@ -454,10 +454,10 @@ namespace DataAccessComponent.DataGateway
                 List<PizzaOrder> pizzaOrders = null;
 
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // perform the load
-                    pizzaOrders = this.AppController.ControllerManager.PizzaOrderController.FetchAll(tempPizzaOrder);
+                    pizzaOrders = PizzaOrderController.FetchAll(tempPizzaOrder, DataManager);
                 }
 
                 // return value
@@ -476,10 +476,10 @@ namespace DataAccessComponent.DataGateway
                 bool saved = false;
 
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // perform the save
-                    saved = this.AppController.ControllerManager.CustomerController.Save(ref customer);
+                    saved = CustomerController.Save(ref customer, DataManager);
                 }
 
                 // return value
@@ -498,10 +498,10 @@ namespace DataAccessComponent.DataGateway
                 bool saved = false;
 
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // perform the save
-                    saved = this.AppController.ControllerManager.OrderDetailController.Save(ref orderDetail);
+                    saved = OrderDetailController.Save(ref orderDetail, DataManager);
                 }
 
                 // return value
@@ -520,10 +520,10 @@ namespace DataAccessComponent.DataGateway
                 bool saved = false;
 
                 // if the AppController exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // perform the save
-                    saved = this.AppController.ControllerManager.PizzaOrderController.Save(ref pizzaOrder);
+                    saved = PizzaOrderController.Save(ref pizzaOrder, DataManager);
                 }
 
                 // return value
@@ -557,6 +557,31 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
             
+            #region DataManager
+            /// <summary>
+            /// This read only property returns the value of DataManager from the object AppController.
+            /// </summary>
+            public DataManager DataManager
+            {
+
+                get
+                {
+                    // initial value
+                    DataManager dataManager = null;
+
+                    // if AppController exists
+                    if (HasAppController)
+                    {
+                        // set the return value
+                        dataManager = AppController.DataManager;
+                    }
+
+                    // return value
+                    return dataManager;
+                }
+            }
+            #endregion
+
             #region HasAppController
             /// <summary>
             /// This property returns true if this object has an 'AppController'.
@@ -591,10 +616,26 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
             
+            #region HasDataManager
+            /// <summary>
+            /// This property returns true if this object has a 'DataManager'.
+            /// </summary>
+            public bool HasDataManager
+            {
+                get
+                {
+                    // initial value
+                    bool hasDataManager = (DataManager != null);
+
+                    // return value
+                    return hasDataManager;
+                }
+            }
+            #endregion
+            
         #endregion
 
     }
     #endregion
 
 }
-

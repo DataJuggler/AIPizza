@@ -2,6 +2,7 @@
 
 #region using statements
 
+using DataAccessComponent.Data;
 using DataAccessComponent.DataBridge;
 using DataAccessComponent.DataOperations;
 using DataAccessComponent.Logging;
@@ -21,23 +22,6 @@ namespace DataAccessComponent.Controllers
     /// </summary>
     public class CustomerController
     {
-
-        #region Private Variables
-        private ErrorHandler errorProcessor;
-        private ApplicationController appController;
-        #endregion
-
-        #region Constructor
-        /// <summary>
-        /// Creates a new 'CustomerController' object.
-        /// </summary>
-        public CustomerController(ErrorHandler errorProcessorArg, ApplicationController appControllerArg)
-        {
-            // Save Arguments
-            this.ErrorProcessor = errorProcessorArg;
-            this.AppController = appControllerArg;
-        }
-        #endregion
 
         #region Methods
 
@@ -67,15 +51,15 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Delete(Customer tempCustomer)
+            #region Delete(Customer tempCustomer, DataManager dataManager)
             /// <summary>
             /// Deletes a 'Customer' from the database
-            /// This method calls the DataBridgeManager to execute the delete using the
+            /// This method calls the DataBridgeManager to execute the delete
             /// procedure 'Customer_Delete'.
             /// </summary>
             /// <param name='customer'>The 'Customer' to delete.</param>
             /// <returns>True if the delete is successful or false if not.</returns>
-            public bool Delete(Customer tempCustomer)
+            public static bool Delete(Customer tempCustomer, DataManager dataManager)
             {
                 // locals
                 bool deleted = false;
@@ -87,16 +71,16 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // verify tempcustomer exists before attemptintg to delete
-                    if(tempCustomer != null)
+                    if (tempCustomer != null)
                     {
                         // Create Delegate For DataOperation
-                        ApplicationController.DataOperationMethod deleteCustomerMethod = this.AppController.DataBridge.DataOperations.CustomerMethods.DeleteCustomer;
+                        ApplicationController.DataOperationMethod deleteCustomerMethod = CustomerMethods.DeleteCustomer;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateCustomerParameter(tempCustomer);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, deleteCustomerMethod, parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteCustomerMethod, parameters, dataManager);
 
                         // If return object exists
                         if (returnObject != null)
@@ -112,12 +96,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -125,14 +105,14 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region FetchAll(Customer tempCustomer)
+            #region FetchAll(Customer tempCustomer, DataManager dataManager)
             /// <summary>
             /// This method fetches a collection of 'Customer' objects.
             /// This method used the DataBridgeManager to execute the fetch all using the
             /// procedure 'Customer_FetchAll'.</summary>
             /// <param name='tempCustomer'>A temporary Customer for passing values.</param>
             /// <returns>A collection of 'Customer' objects.</returns>
-            public List<Customer> FetchAll(Customer tempCustomer)
+            public static List<Customer> FetchAll(Customer tempCustomer, DataManager dataManager)
             {
                 // Initial value
                 List<Customer> customerList = null;
@@ -144,13 +124,13 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // Create DataOperation Method
-                    ApplicationController.DataOperationMethod fetchAllMethod = this.AppController.DataBridge.DataOperations.CustomerMethods.FetchAll;
+                    ApplicationController.DataOperationMethod fetchAllMethod = CustomerMethods.FetchAll;
 
                     // Create parameters for this method
                     List<PolymorphicObject> parameters = CreateCustomerParameter(tempCustomer);
 
                     // Perform DataOperation
-                    PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, fetchAllMethod , parameters);
+                    PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, fetchAllMethod , parameters, dataManager);
 
                     // If return object exists
                     if ((returnObject != null) && (returnObject.ObjectValue as List<Customer> != null))
@@ -161,12 +141,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -174,7 +150,7 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Find(Customer tempCustomer)
+            #region Find(Customer tempCustomer, DataManager dataManager)
             /// <summary>
             /// Finds a 'Customer' object by the primary key.
             /// This method used the DataBridgeManager to execute the 'Find' using the
@@ -182,7 +158,7 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='tempCustomer'>A temporary Customer for passing values.</param>
             /// <returns>A 'Customer' object if found else a null 'Customer'.</returns>
-            public Customer Find(Customer tempCustomer)
+            public static Customer Find(Customer tempCustomer, DataManager dataManager)
             {
                 // Initial values
                 Customer customer = null;
@@ -194,16 +170,16 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // If object exists
-                    if(tempCustomer != null)
+                    if (tempCustomer != null)
                     {
                         // Create DataOperation
-                        ApplicationController.DataOperationMethod findMethod = this.AppController.DataBridge.DataOperations.CustomerMethods.FindCustomer;
+                        ApplicationController.DataOperationMethod findMethod = CustomerMethods.FindCustomer;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateCustomerParameter(tempCustomer);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, findMethod , parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, findMethod , parameters, dataManager);
 
                         // If return object exists
                         if ((returnObject != null) && (returnObject.ObjectValue as Customer != null))
@@ -215,12 +191,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -228,7 +200,7 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Insert(Customer customer)
+            #region Insert(Customer customer, DataManager dataManager)
             /// <summary>
             /// Insert a 'Customer' object into the database.
             /// This method uses the DataBridgeManager to execute the 'Insert' using the
@@ -236,7 +208,7 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='customer'>The 'Customer' object to insert.</param>
             /// <returns>The id (int) of the new  'Customer' object that was inserted.</returns>
-            public int Insert(Customer customer)
+            public static int Insert(Customer customer, DataManager dataManager)
             {
                 // Initial values
                 int newIdentity = -1;
@@ -248,15 +220,15 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // If Customerexists
-                    if(customer != null)
+                    if (customer != null)
                     {
-                        ApplicationController.DataOperationMethod insertMethod = this.AppController.DataBridge.DataOperations.CustomerMethods.InsertCustomer;
+                        ApplicationController.DataOperationMethod insertMethod = CustomerMethods.InsertCustomer;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateCustomerParameter(customer);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, insertMethod , parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
 
                         // If return object exists
                         if (returnObject != null)
@@ -268,12 +240,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -281,29 +249,29 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Save(ref Customer customer)
+            #region Save(ref Customer customer, DataManager dataManager)
             /// <summary>
             /// Saves a 'Customer' object into the database.
             /// This method calls the 'Insert' or 'Update' method.
             /// </summary>
             /// <param name='customer'>The 'Customer' object to save.</param>
             /// <returns>True if successful or false if not.</returns>
-            public bool Save(ref Customer customer)
+            public static bool Save(ref Customer customer, DataManager dataManager)
             {
                 // Initial value
                 bool saved = false;
 
                 // If the customer exists.
-                if(customer != null)
+                if (customer != null)
                 {
                     // Is this a new Customer
-                    if(customer.IsNew)
+                    if (customer.IsNew)
                     {
                         // Insert new Customer
-                        int newIdentity = this.Insert(customer);
+                        int newIdentity = Insert(customer, dataManager);
 
                         // if insert was successful
-                        if(newIdentity > 0)
+                        if (newIdentity > 0)
                         {
                             // Update Identity
                             customer.UpdateIdentity(newIdentity);
@@ -315,7 +283,7 @@ namespace DataAccessComponent.Controllers
                     else
                     {
                         // Update Customer
-                        saved = this.Update(customer);
+                        saved = Update(customer, dataManager);
                     }
                 }
 
@@ -324,7 +292,7 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Update(Customer customer)
+            #region Update(Customer customer, DataManager dataManager)
             /// <summary>
             /// This method Updates a 'Customer' object in the database.
             /// This method used the DataBridgeManager to execute the 'Update' using the
@@ -332,7 +300,7 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='customer'>The 'Customer' object to update.</param>
             /// <returns>True if successful else false if not.</returns>
-            public bool Update(Customer customer)
+            public static bool Update(Customer customer, DataManager dataManager)
             {
                 // Initial value
                 bool saved = false;
@@ -343,15 +311,15 @@ namespace DataAccessComponent.Controllers
 
                 try
                 {
-                    if(customer != null)
+                    if (customer != null)
                     {
                         // Create Delegate
-                        ApplicationController.DataOperationMethod updateMethod = this.AppController.DataBridge.DataOperations.CustomerMethods.UpdateCustomer;
+                        ApplicationController.DataOperationMethod updateMethod = CustomerMethods.UpdateCustomer;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateCustomerParameter(customer);
                         // Perform DataOperation
-                        PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, updateMethod , parameters);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
 
                         // If return object exists
                         if ((returnObject != null) && (returnObject.Boolean != null) && (returnObject.Boolean.Value == NullableBooleanEnum.True))
@@ -363,36 +331,12 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log the current error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
                 return saved;
-            }
-            #endregion
-
-        #endregion
-
-        #region Properties
-
-            #region AppController
-            public ApplicationController AppController
-            {
-                get { return appController; }
-                set { appController = value; }
-            }
-            #endregion
-
-            #region ErrorProcessor
-            public ErrorHandler ErrorProcessor
-            {
-                get { return errorProcessor; }
-                set { errorProcessor = value; }
             }
             #endregion
 

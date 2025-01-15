@@ -23,23 +23,8 @@ namespace DataAccessComponent.DataOperations
     /// <summary>
     /// This class contains methods for modifying a 'PizzaOrder' object.
     /// </summary>
-    public class PizzaOrderMethods
+    public static class PizzaOrderMethods
     {
-
-        #region Private Variables
-        private DataManager dataManager;
-        #endregion
-
-        #region Constructor
-        /// <summary>
-        /// Creates a new Creates a new 'PizzaOrderMethods' object.
-        /// </summary>
-        public PizzaOrderMethods(DataManager dataManagerArg)
-        {
-            // Save Argument
-            this.DataManager = dataManagerArg;
-        }
-        #endregion
 
         #region Methods
 
@@ -49,7 +34,7 @@ namespace DataAccessComponent.DataOperations
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'PizzaOrder' to delete.
             /// <returns>A PolymorphicObject object with a Boolean value.
-            internal PolymorphicObject DeletePizzaOrder(List<PolymorphicObject> parameters, DataConnector dataConnector)
+            internal static PolymorphicObject DeletePizzaOrder(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
                 PolymorphicObject returnObject = new PolymorphicObject();
@@ -115,7 +100,7 @@ namespace DataAccessComponent.DataOperations
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'PizzaOrder' to delete.
             /// <returns>A PolymorphicObject object with all  'PizzaOrders' objects.
-            internal PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)
+            internal static PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
                 PolymorphicObject returnObject = new PolymorphicObject();
@@ -174,7 +159,7 @@ namespace DataAccessComponent.DataOperations
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'PizzaOrder' to delete.
             /// <returns>A PolymorphicObject object with a Boolean value.
-            internal PolymorphicObject FindPizzaOrder(List<PolymorphicObject> parameters, DataConnector dataConnector)
+            internal static PolymorphicObject FindPizzaOrder(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
                 PolymorphicObject returnObject = new PolymorphicObject();
@@ -235,7 +220,7 @@ namespace DataAccessComponent.DataOperations
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'PizzaOrder' to insert.
             /// <returns>A PolymorphicObject object with a Boolean value.
-            internal PolymorphicObject InsertPizzaOrder(List<PolymorphicObject> parameters, DataConnector dataConnector)
+            internal static PolymorphicObject InsertPizzaOrder(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
                 PolymorphicObject returnObject = new PolymorphicObject();
@@ -290,7 +275,7 @@ namespace DataAccessComponent.DataOperations
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'PizzaOrder' to update.
             /// <returns>A PolymorphicObject object with a value.
-            internal PolymorphicObject UpdatePizzaOrder(List<PolymorphicObject> parameters, DataConnector dataConnector)
+            internal static PolymorphicObject UpdatePizzaOrder(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
                 PolymorphicObject returnObject = new PolymorphicObject();
@@ -350,18 +335,6 @@ namespace DataAccessComponent.DataOperations
 
                 // return value
                 return returnObject;
-            }
-            #endregion
-
-        #endregion
-
-        #region Properties
-
-            #region DataManager 
-            public DataManager DataManager 
-            {
-                get { return dataManager; }
-                set { dataManager = value; }
             }
             #endregion
 

@@ -195,7 +195,7 @@ namespace AIPizza.Components
                         if (isValid)
                         {
                             // Create a new instance of a 'Gateway' object.
-                            Gateway gateway = new Gateway(Connection.Name);
+                            Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                             // Save the customer
                             bool saved = gateway.SaveCustomer(ref customer);

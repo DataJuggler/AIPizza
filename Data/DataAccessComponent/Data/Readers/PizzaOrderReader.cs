@@ -51,7 +51,7 @@ namespace DataAccessComponent.Data.Readers
                     pizzaOrder.Filled = DataHelper.ParseBoolean(dataRow.ItemArray[filledfield], false);
                     pizzaOrder.UpdateIdentity(DataHelper.ParseInteger(dataRow.ItemArray[idfield], 0));
                     pizzaOrder.OrderDate = DataHelper.ParseDate(dataRow.ItemArray[orderDatefield]);
-                    pizzaOrder.OrderType = (OrderTypeEnum) DataHelper.ParseInteger(dataRow.ItemArray[orderTypefield], 0);
+                    pizzaOrder.OrderType = DataHelper.ParseInteger(dataRow.ItemArray[orderTypefield], 0);
                 }
                 catch
                 {

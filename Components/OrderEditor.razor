@@ -50,7 +50,7 @@
         <div class="row">
             <CalendarComponent Name="OrderDateControl" Unit="px" HeightUnit="px" Height="146"
                 Position="relative" ButtonHeight=25 ButtonWidth=24 CalendarTop="-112" CalendarLeft="64" 
-                Caption="Order Date:" Parent="this" ButtonTop = "-1" Width="224" Column2Width="128" 
+                Caption="Order Date:" Parent="this" ButtonTop="-1" Width="224" Column2Width="128" 
                 ControlHeight="32" TextBoxHeight="22" ButtonLeft="-1" Theme="ThemeEnum.Black" 
                 LabelColor="Color.Coral" LabelFontName="Calibri" LabelFontSize="18" DayRowColor="Color.Firebrick"
                 DayRowTextColor="Color.GhostWhite"
@@ -67,4 +67,13 @@
             HoursTextBoxLeft="0" MinutesTextBoxWidth="20" Left="18" 
             MinutesTextBoxLeft="0"></TimeComponent>
     </div>
+    <div class="height128">
+    <OrderDetailComponent>
+
+    </OrderDetailComponent>
+    </div>
 }
+<div class="right80 down64 height128 textdonotwrap">
+<button height="32" class="redbutton displayinline" @onclick="Save">Save</button>
+<button height="32" class="redbutton displayinline right16" @onclick="Cancel">Cancel</button>
+</div>
